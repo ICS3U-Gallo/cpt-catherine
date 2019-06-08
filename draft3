@@ -1,0 +1,53 @@
+import arcade
+
+
+WIDTH = 640
+HEIGHT = 480
+
+x = 100
+xx = 500
+
+
+def setup():
+    arcade.open_window(WIDTH, HEIGHT, "My Arcade Game")
+    arcade.set_background_color(arcade.color.WHITE)
+    arcade.schedule(update, 1/60)
+
+    # Override arcade window methods
+    window = arcade.get_window()
+    window.on_key_press = on_key_press
+    window.on_key_release = on_key_release
+    window.on_mouse_press = on_mouse_press
+
+    arcade.run()
+
+
+def update(delta_time):
+    global x
+    global xx
+
+    arcade.start_render()
+    # Draw in here...
+    arcade.draw_circle_filled(x, 100, 25, arcade.color.BLUE)
+    arcade.draw_circle_filled(xx, 100, 25, arcade.color.RED)
+    if x<(xx-50) or xx>(x+50):
+        x += 5
+        xx -= 5
+    else:
+        arcade.draw_text("Collision!", 100, 240, arcade.color.PAKISTAN_GREEN, 100, 1000, font_name="GARA")
+
+
+def on_key_press(key, modifiers):
+    pass
+
+
+def on_key_release(key, modifiers):
+    pass
+
+
+def on_mouse_press(x, y, button, modifiers):
+    pass
+
+
+if __name__ == '__main__':
+    setup()
