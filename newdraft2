@@ -1,0 +1,128 @@
+import arcade
+
+
+WIDTH = 450
+HEIGHT = 450
+c=1
+
+def setup():
+    arcade.open_window(WIDTH, HEIGHT, "My Arcade Game")
+    arcade.set_background_color(arcade.color.HONEYDEW)
+    arcade.schedule(update, 1/60)
+
+    # Override arcade window methods
+    window = arcade.get_window()
+    window.on_draw = on_draw
+    window.on_key_press = on_key_press
+    window.on_key_release = on_key_release
+    window.on_mouse_press = on_mouse_press
+
+    arcade.run()
+
+
+def update(delta_time):
+    pass
+
+
+def on_draw():
+    arcade.start_render()
+    # Variables:
+    constant=(146/3)
+    coordinate1=76-constant
+    coordinate2=76
+    coordinate3=76+constant
+    coordinate4=coordinate3+constant+3
+    coordinate5=coordinate4+constant
+    coordinate6=coordinate5+constant
+    coordinate7=coordinate6+constant+3
+    coordinate8=coordinate7+constant
+    coordinate9=coordinate8+constant
+    big_square_width=146
+    line_shift=149
+    x=(146/3)+3
+    y=(146/3)+3
+    width=1
+    width2=1
+    global c
+
+    if c==2:
+        arcade.draw_rectangle_filled(200, 200, 300, 200, arcade.color.AIR_FORCE_BLUE)
+
+
+    arcade.draw_rectangle_outline(225,225,447,447,arcade.color.LAPIS_LAZULI,3)
+    for a in range(1,9):
+        if a%3==0:
+            width=3
+            x+=1.5
+            arcade.draw_line(x,0,x,450,arcade.color.LAPIS_LAZULI,width)
+            x += (146 / 3)+1.5
+        else:
+            width=1
+            arcade.draw_line(x, 0, x, 450, arcade.color.LAPIS_LAZULI, width)
+            x+=(146/3)
+
+    for b in range(1,9):
+        if b%3==0:
+            width2=3
+            y+=1.5
+            arcade.draw_line(0,y,450,y,arcade.color.LAPIS_LAZULI,width2)
+            y += (146 / 3)+1.5
+        else:
+            width2=1
+            arcade.draw_line(0, y, 450, y, arcade.color.LAPIS_LAZULI, width2)
+            y+=(146/3)
+
+    #drawing numbers
+    arcade.draw_text("9", coordinate2, coordinate9, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("5", coordinate3, coordinate9, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("3", coordinate4, coordinate9, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("1", coordinate5, coordinate9, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("6", coordinate8, coordinate9, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("6", coordinate1, coordinate8, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("4", coordinate6, coordinate8, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("5", coordinate8, coordinate8, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("7", coordinate6, coordinate7, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("8", coordinate7, coordinate7, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("2", coordinate9, coordinate7, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("1", coordinate1, coordinate6, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("4", coordinate8, coordinate6, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("9", coordinate1, coordinate5, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("1", coordinate4, coordinate5, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("7", coordinate5, coordinate5, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("5", coordinate6, coordinate5, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("6", coordinate9, coordinate5, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("7", coordinate2, coordinate4, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("1", coordinate9, coordinate4, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("5", coordinate1, coordinate3, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("8", coordinate3, coordinate3, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("7", coordinate4, coordinate3, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("1", coordinate2, coordinate2, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("9", coordinate4, coordinate2, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("5", coordinate9, coordinate2, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("4", coordinate2, coordinate1, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("5", coordinate5, coordinate1, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("1", coordinate6, coordinate1, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("6", coordinate7, coordinate1, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+    arcade.draw_text("7", coordinate8, coordinate1, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center", anchor_x="center", anchor_y="center")
+
+
+
+
+
+def on_key_press(key, modifiers):
+    pass
+
+
+def on_key_release(key, modifiers):
+    pass
+
+
+def on_mouse_press(x, y, button, modifiers):
+    print(x)
+    if x>100:
+        global c
+        c=2
+
+
+if __name__ == '__main__':
+    setup()
