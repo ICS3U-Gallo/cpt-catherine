@@ -1,0 +1,1128 @@
+import arcade
+
+WIDTH = 450
+HEIGHT = 450
+
+column_1 = []
+column_2 = []
+column_3 = []
+column_4 = []
+column_5 = []
+column_6 = []
+column_7 = []
+column_8 = []
+column_9 = []
+column_list=[column_1,column_2,column_3,column_4,column_5,column_6,column_7,column_8,column_9]
+newest_click = 0
+
+key_1=0
+key_2=0
+key_3=0
+key_4=0
+key_5=0
+key_6=0
+key_7=0
+key_8=0
+key_9=0
+
+A=[5,9,1,6]
+B=[4,1,7,9]
+C=[8,5]
+D=[9,7,1,3]
+E=[5,7,1]
+F=[1,5,7,4]
+G=[6,8]
+H=[7,4,5,6]
+I=[5,1,6,2]
+letter_list=[A,B,C,D,E,F,G,H,I]
+
+R1=[4,5,1,6,7]
+R2=[1,9,5]
+R3=[5,8,7]
+R4=[7,1]
+R5=[9,1,7,5,6]
+R6=[1,4]
+R7=[7,8,2]
+R8=[6,4,5]
+R9=[9,5,3,1,6]
+row_list=[R1,R2,R3,R4,R5,R6,R7,R8,R9]
+
+
+red_list_x=[]
+red_list_y=[]
+red_list_content=[]
+green_list_x=[]
+green_list_y=[]
+green_list_content=[]
+
+
+
+def setup():
+    arcade.open_window(WIDTH, HEIGHT, "My Arcade Game")
+    arcade.set_background_color(arcade.color.HONEYDEW)
+    arcade.schedule(update, 1 / 60)
+
+    # Override arcade window methods
+    window = arcade.get_window()
+    window.on_draw = on_draw
+    window.on_key_press = on_key_press
+    window.on_key_release = on_key_release
+    window.on_mouse_press = on_mouse_press
+
+    arcade.run()
+
+
+def update(delta_time):
+    pass
+
+
+def on_draw():
+    arcade.start_render()
+
+    # Variables:
+    constant = (146 / 3)
+    coordinate1 = 76 - constant
+    coordinate2 = 76
+    coordinate3 = 76 + constant
+    coordinate4 = coordinate3 + constant + 3
+    coordinate5 = coordinate4 + constant
+    coordinate6 = coordinate5 + constant
+    coordinate7 = coordinate6 + constant + 3
+    coordinate8 = coordinate7 + constant
+    coordinate9 = coordinate8 + constant
+    coordinate_list=[coordinate1,coordinate2,coordinate3,coordinate4,coordinate5,coordinate6,coordinate7,coordinate8,coordinate9]
+
+    global column_1
+    global column_2
+    global column_3
+    global column_4
+    global column_5
+    global column_6
+    global column_7
+    global column_8
+    global column_9
+
+    global key_1
+    global key_2
+    global key_3
+    global key_4
+    global key_5
+    global key_6
+    global key_7
+    global key_8
+    global key_9
+
+    global red_list_x
+    global red_list_y
+    global red_list_content
+    global green_list_x
+    global green_list_y
+    global green_list_content
+
+
+    big_square_width = 146
+    line_shift = 149
+    x = (146 / 3) + 3
+    y = (146 / 3) + 3
+    width = 1
+    width2 = 1
+    square_allowed=1
+
+    arcade.draw_rectangle_outline(225, 225, 447, 447, arcade.color.LAPIS_LAZULI, 3)
+    for a in range(1, 9):
+        if a % 3 == 0:
+            width = 3
+            x += 1.5
+            arcade.draw_line(x, 0, x, 450, arcade.color.LAPIS_LAZULI, width)
+            x += (146 / 3) + 1.5
+        else:
+            width = 1
+            arcade.draw_line(x, 0, x, 450, arcade.color.LAPIS_LAZULI, width)
+            x += (146 / 3)
+
+    for b in range(1, 9):
+        if b % 3 == 0:
+            width2 = 3
+            y += 1.5
+            arcade.draw_line(0, y, 450, y, arcade.color.LAPIS_LAZULI, width2)
+            y += (146 / 3) + 1.5
+        else:
+            width2 = 1
+            arcade.draw_line(0, y, 450, y, arcade.color.LAPIS_LAZULI, width2)
+            y += (146 / 3)
+
+    # drawing numbers
+    arcade.draw_text("9", coordinate2, coordinate9, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("5", coordinate3, coordinate9, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("3", coordinate4, coordinate9, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("1", coordinate5, coordinate9, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("6", coordinate8, coordinate9, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("6", coordinate1, coordinate8, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("4", coordinate6, coordinate8, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("5", coordinate8, coordinate8, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("7", coordinate6, coordinate7, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("8", coordinate7, coordinate7, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("2", coordinate9, coordinate7, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("1", coordinate1, coordinate6, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("4", coordinate8, coordinate6, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("9", coordinate1, coordinate5, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("1", coordinate4, coordinate5, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("7", coordinate5, coordinate5, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("5", coordinate6, coordinate5, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("6", coordinate9, coordinate5, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("7", coordinate2, coordinate4, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("1", coordinate9, coordinate4, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("5", coordinate1, coordinate3, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("8", coordinate3, coordinate3, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("7", coordinate4, coordinate3, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("1", coordinate2, coordinate2, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("9", coordinate4, coordinate2, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("5", coordinate9, coordinate2, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("4", coordinate2, coordinate1, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("5", coordinate5, coordinate1, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("1", coordinate6, coordinate1, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("6", coordinate7, coordinate1, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+    arcade.draw_text("7", coordinate8, coordinate1, arcade.color.AIR_FORCE_BLUE, 32, 30, align="center",
+                     anchor_x="center", anchor_y="center")
+
+    if newest_click != 0:
+        newer_click=newest_click-1
+        x_value=coordinate_list[newer_click]
+        y_value=(column_list[newer_click])[-1]
+        if y_value>1 and y_value<2:
+            y_value_2=coordinate1
+        elif y_value>2 and y_value<3:
+            y_value_2=coordinate2
+        elif y_value>3 and y_value<4:
+            y_value_2=coordinate3
+        elif y_value>4 and y_value<5:
+            y_value_2=coordinate4
+        elif y_value>5 and y_value<6:
+            y_value_2=coordinate5
+        elif y_value>6 and y_value<7:
+            y_value_2=coordinate6
+        elif y_value>7 and y_value<8:
+            y_value_2=coordinate7
+        elif y_value>8 and y_value<9:
+            y_value_2=coordinate8
+        elif y_value>9 and y_value<10:
+            y_value_2=coordinate9
+
+        click_ok=0
+        ok_list1=[coordinate1, coordinate2, coordinate4, coordinate7, coordinate9]
+        ok_list2=[coordinate3, coordinate5, coordinate6, coordinate7, coordinate8]
+        ok_list3=[coordinate1, coordinate2, coordinate4, coordinate5, coordinate6, coordinate7, coordinate8]
+        ok_list4=[coordinate1, coordinate4, coordinate6, coordinate7, coordinate8]
+        ok_list5=[coordinate2, coordinate3, coordinate4, coordinate6, coordinate7, coordinate8]
+        ok_list6=[coordinate2, coordinate3, coordinate4, coordinate6, coordinate9]
+        ok_list7=[coordinate2, coordinate3, coordinate4, coordinate5, coordinate6, coordinate8, coordinate9]
+        ok_list8=[coordinate2, coordinate3, coordinate4, coordinate5, coordinate7]
+        ok_list9=[coordinate1, coordinate3, coordinate6, coordinate8, coordinate9]
+        ok_list=[ok_list1, ok_list2, ok_list3, ok_list4, ok_list5, ok_list6, ok_list7, ok_list8, ok_list9]
+        small_list=0
+
+        mini_square1=[coordinate1,coordinate2,coordinate3]
+        mini_square2=[coordinate4,coordinate5,coordinate6]
+        mini_square3=[coordinate7,coordinate8,coordinate9]
+        tiny_square1=[5,8,1,4]
+        tiny_square2 = [1,9,7]
+        tiny_square3 = [6,9,5]
+        tiny_square4 = [7,9,5,1]
+        tiny_square5 = [1,7,5]
+        tiny_square6 = [3,1,4,7]
+        tiny_square7 = [6,7,5]
+        tiny_square8 = [4,6,1]
+        tiny_square9 = [8,6,5,2]
+
+
+
+        for column in range(len(coordinate_list)):
+            if x_value==coordinate_list[column]:
+                small_list=ok_list[column]
+                for j in small_list:
+                    if y_value_2==j:
+                        arcade.draw_rectangle_filled(x_value, y_value_2, constant - 1, constant - 1, arcade.color.WHITE)
+                        arcade.draw_rectangle_filled(x_value-12, y_value_2, 2, 35, arcade.color.CHARCOAL)
+                        click_ok=1
+
+        selected_column=0
+        selected_row=0
+        duplicate_check_red=0
+        duplicate_check_green=0
+        number=0
+        if click_ok==1:
+            if key_1==1:
+                number=1
+                selected_column=letter_list[newest_click-1]
+                for k1 in selected_column:
+                    if k1==1:
+                        duplicate_check_red=1
+                        break
+                    else:
+                        duplicate_check_green=1
+                selected_row=(row_list[coordinate_list.index(y_value_2)])
+                print(selected_row)
+                for kk1 in selected_row:
+                    if kk1==1:
+                        duplicate_check_red = 1
+                        break
+                    else:
+                        duplicate_check_green = 1
+                for firstthird1 in mini_square1:
+                    if firstthird1==x_value:
+                        for firstfirstthird1 in mini_square1:
+                            if firstfirstthird1==y_value_2:
+                                #seeing if it's on the list
+                                for check11 in tiny_square1:
+                                    if check11==1:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for firstsecondthird1 in mini_square2:
+                            if firstsecondthird1==y_value_2:
+                                for check12 in tiny_square2:
+                                    if check12==1:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for firstthirdthird1 in mini_square3:
+                            if firstthirdthird1==y_value_2:
+                                for check13 in tiny_square3:
+                                    if check13==1:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                for secondthird1 in mini_square2:
+                    if secondthird1==x_value:
+                        #finding columns
+                        for secondfirstthird1 in mini_square1:
+                            if secondfirstthird1==y_value_2:
+                                #seeing if it's on the list
+                                for check14 in tiny_square4:
+                                    if check14==1:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for secondsecondthird1 in mini_square2:
+                            if secondsecondthird1==y_value_2:
+                                for check15 in tiny_square5:
+                                    if check15==1:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for secondthirdthird1 in mini_square3:
+                            if secondthirdthird1==y_value_2:
+                                for check16 in tiny_square6:
+                                    if check16==1:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                for thirdthird1 in mini_square3:
+                    if thirdthird1==x_value:
+                        #finding columns
+                        for thirdfirstthird1 in mini_square1:
+                            if thirdfirstthird1==y_value_2:
+                                #seeing if it's on the list
+                                for check17 in tiny_square7:
+                                    if check17==1:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for thirdsecondthird1 in mini_square2:
+                            if thirdsecondthird1==y_value_2:
+                                for check18 in tiny_square8:
+                                    if check18==1:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for thirdthirdthird1 in mini_square3:
+                            if thirdthirdthird1==y_value_2:
+                                for check19 in tiny_square9:
+                                    if check19==1:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+
+
+            elif key_2==1:
+                number=2
+                selected_column = letter_list[newest_click - 1]
+                for k2 in selected_column:
+                    if k2 == 2:
+                        duplicate_check_red=1
+                        break
+                    else:
+                        duplicate_check_green=1
+                selected_row=(row_list[coordinate_list.index(y_value_2)])
+                print(selected_row)
+                for kk2 in selected_row:
+                    if kk2==2:
+                        duplicate_check_red = 1
+                        break
+                    else:
+                        duplicate_check_green = 1
+                for firstthird2 in mini_square1:
+                    if firstthird2==x_value:
+                        for firstfirstthird2 in mini_square1:
+                            if firstfirstthird2==y_value_2:
+                                #seeing if it's on the list
+                                for check21 in tiny_square1:
+                                    if check21==2:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for firstsecondthird2 in mini_square2:
+                            if firstsecondthird2==y_value_2:
+                                for check22 in tiny_square2:
+                                    if check22==2:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for firstthirdthird2 in mini_square3:
+                            if firstthirdthird2==y_value_2:
+                                for check23 in tiny_square3:
+                                    if check23==2:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                for secondthird2 in mini_square2:
+                    if secondthird2==x_value:
+                        #finding columns
+                        for secondfirstthird2 in mini_square1:
+                            if secondfirstthird2==y_value_2:
+                                #seeing if it's on the list
+                                for check24 in tiny_square4:
+                                    if check24==2:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for secondsecondthird2 in mini_square2:
+                            if secondsecondthird2==y_value_2:
+                                for check25 in tiny_square5:
+                                    if check25==2:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for secondthirdthird2 in mini_square3:
+                            if secondthirdthird2==y_value_2:
+                                for check26 in tiny_square6:
+                                    if check26==2:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                for thirdthird2 in mini_square3:
+                    if thirdthird2==x_value:
+                        #finding columns
+                        for thirdfirstthird2 in mini_square1:
+                            if thirdfirstthird2==y_value_2:
+                                #seeing if it's on the list
+                                for check27 in tiny_square7:
+                                    if check27==2:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for thirdsecondthird2 in mini_square2:
+                            if thirdsecondthird2==y_value_2:
+                                for check28 in tiny_square8:
+                                    if check28==2:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for thirdthirdthird2 in mini_square3:
+                            if thirdthirdthird2==y_value_2:
+                                for check29 in tiny_square9:
+                                    if check29==2:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+
+            elif key_3==1:
+                number=3
+                selected_column = letter_list[newest_click - 1]
+                for k3 in selected_column:
+                    if k3 == 3:
+                        duplicate_check_red=1
+                        break
+                    else:
+                        duplicate_check_green=1
+                selected_row=(row_list[coordinate_list.index(y_value_2)])
+                print(selected_row)
+                for kk3 in selected_row:
+                    if kk3==3:
+                        duplicate_check_red = 1
+                        break
+                    else:
+                        duplicate_check_green = 1
+                for firstthird3 in mini_square1:
+                    if firstthird3==x_value:
+                        for firstfirstthird3 in mini_square1:
+                            if firstfirstthird3==y_value_2:
+                                #seeing if it's on the list
+                                for check31 in tiny_square1:
+                                    if check31==3:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for firstsecondthird3 in mini_square2:
+                            if firstsecondthird3==y_value_2:
+                                for check32 in tiny_square2:
+                                    if check32==3:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for firstthirdthird3 in mini_square3:
+                            if firstthirdthird3==y_value_2:
+                                for check33 in tiny_square3:
+                                    if check33==3:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                for secondthird3 in mini_square2:
+                    if secondthird3==x_value:
+                        #finding columns
+                        for secondfirstthird3 in mini_square1:
+                            if secondfirstthird3==y_value_2:
+                                #seeing if it's on the list
+                                for check34 in tiny_square4:
+                                    if check34==3:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for secondsecondthird3 in mini_square2:
+                            if secondsecondthird3==y_value_2:
+                                for check35 in tiny_square5:
+                                    if check35==3:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for secondthirdthird3 in mini_square3:
+                            if secondthirdthird3==y_value_2:
+                                for check36 in tiny_square6:
+                                    if check36==3:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                for thirdthird3 in mini_square3:
+                    if thirdthird3==x_value:
+                        #finding columns
+                        for thirdfirstthird3 in mini_square1:
+                            if thirdfirstthird3==y_value_2:
+                                #seeing if it's on the list
+                                for check37 in tiny_square7:
+                                    if check37==3:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for thirdsecondthird3 in mini_square2:
+                            if thirdsecondthird3==y_value_2:
+                                for check38 in tiny_square8:
+                                    if check38==3:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for thirdthirdthird3 in mini_square3:
+                            if thirdthirdthird3==y_value_2:
+                                for check39 in tiny_square9:
+                                    if check39==3:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+            elif key_4==1:
+                number=4
+                selected_column = letter_list[newest_click - 1]
+                for k4 in selected_column:
+                    if k4 == 4:
+                        duplicate_check_red=1
+                        break
+                    else:
+                        duplicate_check_green=1
+                selected_row=(row_list[coordinate_list.index(y_value_2)])
+                print(selected_row)
+                for kk4 in selected_row:
+                    if kk4==4:
+                        duplicate_check_red = 1
+                        break
+                    else:
+                        duplicate_check_green = 1
+                for firstthird4 in mini_square1:
+                    if firstthird4==x_value:
+                        for firstfirstthird4 in mini_square1:
+                            if firstfirstthird4==y_value_2:
+                                #seeing if it's on the list
+                                for check41 in tiny_square1:
+                                    if check41==4:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for firstsecondthird4 in mini_square2:
+                            if firstsecondthird4==y_value_2:
+                                for check42 in tiny_square2:
+                                    if check42==4:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for firstthirdthird4 in mini_square3:
+                            if firstthirdthird4==y_value_2:
+                                for check43 in tiny_square3:
+                                    if check43==4:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                for secondthird4 in mini_square2:
+                    if secondthird4==x_value:
+                        #finding columns
+                        for secondfirstthird4 in mini_square1:
+                            if secondfirstthird4==y_value_2:
+                                #seeing if it's on the list
+                                for check44 in tiny_square4:
+                                    if check44==4:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for secondsecondthird4 in mini_square2:
+                            if secondsecondthird4==y_value_2:
+                                for check45 in tiny_square5:
+                                    if check45==4:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for secondthirdthird4 in mini_square3:
+                            if secondthirdthird4==y_value_2:
+                                for check46 in tiny_square6:
+                                    if check46==4:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                for thirdthird4 in mini_square3:
+                    if thirdthird4==x_value:
+                        #finding columns
+                        for thirdfirstthird4 in mini_square1:
+                            if thirdfirstthird4==y_value_2:
+                                #seeing if it's on the list
+                                for check47 in tiny_square7:
+                                    if check47==4:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for thirdsecondthird4 in mini_square2:
+                            if thirdsecondthird4==y_value_2:
+                                for check48 in tiny_square8:
+                                    if check48==4:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for thirdthirdthird4 in mini_square3:
+                            if thirdthirdthird4==y_value_2:
+                                for check49 in tiny_square9:
+                                    if check49==4:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+            elif key_5==1:
+                number=5
+                selected_column = letter_list[newest_click - 1]
+                for k5 in selected_column:
+                    if k5 == 5:
+                        duplicate_check_red=1
+                        break
+                    else:
+                        duplicate_check_green=1
+                selected_row=(row_list[coordinate_list.index(y_value_2)])
+                print(selected_row)
+                for kk5 in selected_row:
+                    if kk5==5:
+                        duplicate_check_red = 1
+                        break
+                    else:
+                        duplicate_check_green = 1
+                for firstthird5 in mini_square1:
+                    if firstthird5==x_value:
+                        for firstfirstthird5 in mini_square1:
+                            if firstfirstthird5==y_value_2:
+                                #seeing if it's on the list
+                                for check51 in tiny_square1:
+                                    if check51==5:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for firstsecondthird5 in mini_square2:
+                            if firstsecondthird5==y_value_2:
+                                for check52 in tiny_square2:
+                                    if check52==5:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for firstthirdthird5 in mini_square3:
+                            if firstthirdthird5==y_value_2:
+                                for check53 in tiny_square3:
+                                    if check53==5:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                for secondthird5 in mini_square2:
+                    if secondthird5==x_value:
+                        #finding columns
+                        for secondfirstthird5 in mini_square1:
+                            if secondfirstthird5==y_value_2:
+                                #seeing if it's on the list
+                                for check54 in tiny_square4:
+                                    if check54==5:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for secondsecondthird5 in mini_square2:
+                            if secondsecondthird5==y_value_2:
+                                for check55 in tiny_square5:
+                                    if check55==5:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for secondthirdthird5 in mini_square3:
+                            if secondthirdthird5==y_value_2:
+                                for check56 in tiny_square6:
+                                    if check56==5:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                for thirdthird5 in mini_square3:
+                    if thirdthird5==x_value:
+                        #finding columns
+                        for thirdfirstthird5 in mini_square1:
+                            if thirdfirstthird5==y_value_2:
+                                #seeing if it's on the list
+                                for check57 in tiny_square7:
+                                    if check57==5:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for thirdsecondthird5 in mini_square2:
+                            if thirdsecondthird5==y_value_2:
+                                for check58 in tiny_square8:
+                                    if check58==5:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for thirdthirdthird5 in mini_square3:
+                            if thirdthirdthird5==y_value_2:
+                                for check59 in tiny_square9:
+                                    if check59==5:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+
+            elif key_6==1:
+                number=6
+                selected_column = letter_list[newest_click - 1]
+                for k6 in selected_column:
+                    if k6 == 6:
+                        duplicate_check_red=1
+                        break
+                    else:
+                        duplicate_check_green=1
+                selected_row=(row_list[coordinate_list.index(y_value_2)])
+                print(selected_row)
+                for kk6 in selected_row:
+                    if kk6==6:
+                        duplicate_check_red = 1
+                        break
+                    else:
+                        duplicate_check_green = 1
+                for firstthird6 in mini_square6:
+                    if firstthird6==x_value:
+                        for firstfirstthird6 in mini_square1:
+                            if firstfirstthird6==y_value_2:
+                                #seeing if it's on the list
+                                for check61 in tiny_square1:
+                                    if check61==6:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for firstsecondthird6 in mini_square2:
+                            if firstsecondthird6==y_value_2:
+                                for check62 in tiny_square2:
+                                    if check62==6:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for firstthirdthird6 in mini_square3:
+                            if firstthirdthird6==y_value_2:
+                                for check63 in tiny_square3:
+                                    if check63==6:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                for secondthird6 in mini_square2:
+                    if secondthird6==x_value:
+                        #finding columns
+                        for secondfirstthird6 in mini_square1:
+                            if secondfirstthird6==y_value_2:
+                                #seeing if it's on the list
+                                for check64 in tiny_square4:
+                                    if check64==6:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for secondsecondthird6 in mini_square2:
+                            if secondsecondthird6==y_value_2:
+                                for check65 in tiny_square5:
+                                    if check65==6:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for secondthirdthird6 in mini_square3:
+                            if secondthirdthird6==y_value_2:
+                                for check66 in tiny_square6:
+                                    if check66==1:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                for thirdthird6 in mini_square3:
+                    if thirdthird6==x_value:
+                        #finding columns
+                        for thirdfirstthird6 in mini_square1:
+                            if thirdfirstthird6==y_value_2:
+                                #seeing if it's on the list
+                                for check67 in tiny_square7:
+                                    if check67==6:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for thirdsecondthird6 in mini_square2:
+                            if thirdsecondthird6==y_value_2:
+                                for check68 in tiny_square8:
+                                    if check68==6:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+                        for thirdthirdthird6 in mini_square3:
+                            if thirdthirdthird6==y_value_2:
+                                for check69 in tiny_square9:
+                                    if check69==6:
+                                        duplicate_check_red=1
+                                        break
+                                    else:
+                                        duplicate_check_green=1
+            elif key_7==1:
+                number=7
+                selected_column = letter_list[newest_click - 1]
+                for k7 in selected_column:
+                    if k7 == 7:
+                        duplicate_check_red=1
+                        break
+                    else:
+                        duplicate_check_green=1
+                selected_row=(row_list[coordinate_list.index(y_value_2)])
+                print(selected_row)
+                for kk7 in selected_row:
+                    if kk7==7:
+                        duplicate_check_red = 1
+                        break
+                    else:
+                        duplicate_check_green = 1
+            elif key_8==1:
+                number=8
+                selected_column = letter_list[newest_click - 1]
+                for k8 in selected_column:
+                    if k8 == 8:
+                        duplicate_check_red=1
+                        break
+                    else:
+                        duplicate_check_green=1
+                selected_row=(row_list[coordinate_list.index(y_value_2)])
+                print(selected_row)
+                for kk8 in selected_row:
+                    if kk8==8:
+                        duplicate_check_red = 1
+                        break
+                    else:
+                        duplicate_check_green = 1
+            elif key_9==1:
+                number=9
+                selected_column = letter_list[newest_click - 1]
+                for k9 in selected_column:
+                    if k9 == 9:
+                        duplicate_check_red=1
+                        break
+                    else:
+                        duplicate_check_green=1
+                selected_row=(row_list[coordinate_list.index(y_value_2)])
+                print(selected_row)
+                for kk9 in selected_row:
+                    if kk9==9:
+                        duplicate_check_red = 1
+                        break
+                    else:
+                        duplicate_check_green = 1
+
+        if duplicate_check_red==1:
+            for y in range(len(red_list_x)):
+                if x_value == red_list_x[y]:
+                    if y_value_2 == red_list_y[y]:
+                        red_list_x.remove(x_value)
+                        red_list_y.remove(y_value_2)
+                        red_list_content.remove(red_list_content[y])
+            red_list_x.append(x_value)
+            red_list_y.append(y_value_2)
+            red_list_content.append(number)
+            for w in range(len(green_list_x)):
+                try:
+                    if x_value == green_list_x[w]:
+                        if y_value_2 == green_list_y[w]:
+                            green_list_x.remove(x_value)
+                            green_list_y.remove(y_value_2)
+                            green_list_content.remove(green_list_content[w])
+                except IndexError:
+                    break
+            print("")
+            print(f"red list x: {red_list_x}")
+            print(f"red list y: {red_list_y}")
+            print(f"red list content: {red_list_content}")
+            print(f"green list x: {green_list_x}")
+            print(f"green list y: {green_list_y}")
+            print(f"green list content: {green_list_content}")
+
+        elif duplicate_check_green==1:
+            for t in range(len(green_list_x)):
+                if x_value == green_list_x[t]:
+                    if y_value_2 == green_list_y[t]:
+                        green_list_x.remove(x_value)
+                        green_list_y.remove(y_value_2)
+                        green_list_content.remove(green_list_content[t])
+            green_list_x.append(x_value)
+            green_list_y.append(y_value_2)
+            green_list_content.append(number)
+            for q in range(len(red_list_x)):
+                try:
+                    if x_value == red_list_x[q]:
+                        if y_value_2 == red_list_y[q]:
+                            red_list_x.remove(x_value)
+                            red_list_y.remove(y_value_2)
+                            red_list_content.remove(red_list_content[q])
+                except IndexError:
+                    break
+            print("")
+            print(f"red list x: {red_list_x}")
+            print(f"red list y: {red_list_y}")
+            print(f"red list content: {red_list_content}")
+            print(f"green list x: {green_list_x}")
+            print(f"green list y: {green_list_y}")
+            print(f"green list content: {green_list_content}")
+
+
+
+        for red in range(len(red_list_x)):
+            arcade.draw_text(str(red_list_content[red]), red_list_x[red], red_list_y[red], arcade.color.RED, 32, 30, align="center",
+                             anchor_x="center", anchor_y="center")
+        for green in range(len(green_list_x)):
+            arcade.draw_text(str(green_list_content[green]), green_list_x[green], green_list_y[green], arcade.color.GREEN, 32, 30, align="center",
+                             anchor_x="center", anchor_y="center")
+
+
+
+
+def on_key_press(key, modifiers):
+
+    global key_1
+    global key_2
+    global key_3
+    global key_4
+    global key_5
+    global key_6
+    global key_7
+    global key_8
+    global key_9
+
+    if key==49:
+        key_1=1
+    elif key==50:
+        key_2=1
+    elif key==51:
+        key_3=1
+    elif key==52:
+        key_4=1
+    elif key==53:
+        key_5=1
+    elif key==54:
+        key_6=1
+    elif key==55:
+        key_7=1
+    elif key==56:
+        key_8=1
+    elif key==57:
+        key_9=1
+
+
+def on_key_release(key, modifiers):
+    global key_1
+    global key_2
+    global key_3
+    global key_4
+    global key_5
+    global key_6
+    global key_7
+    global key_8
+    global key_9
+
+    if key==49:
+        key_1=0
+    elif key==50:
+        key_2=0
+    elif key==51:
+        key_3=0
+    elif key==52:
+        key_4=0
+    elif key==53:
+        key_5=0
+    elif key==54:
+        key_6=0
+    elif key==55:
+        key_7=0
+    elif key==56:
+        key_8=0
+    elif key==57:
+        key_9=0
+
+
+def on_mouse_press(x, y, button, modifiers):
+    global column_1
+    global column_2
+    global column_3
+    global column_4
+    global column_5
+    global column_6
+    global column_7
+    global column_8
+    global column_9
+
+    c1_length = len(column_1)
+    c2_length = len(column_2)
+    c3_length = len(column_3)
+    c4_length = len(column_4)
+    c5_length = len(column_5)
+    c6_length = len(column_6)
+    c7_length = len(column_7)
+    c8_length = len(column_8)
+    c9_length = len(column_9)
+
+    length_list=[c1_length,c2_length,c3_length,c4_length,c5_length,c6_length,c7_length,c8_length,c9_length]
+
+    converted_x = (x / 50) + 1
+    converted_y = (y / 50) + 1
+    print(converted_x, converted_y)
+    if converted_x > 1 and converted_x < 2:
+        column_1.append(converted_y)
+    elif converted_x > 2 and converted_x < 3:
+        column_2.append(converted_y)
+    elif converted_x > 3 and converted_x < 4:
+        column_3.append(converted_y)
+    elif converted_x > 4 and converted_x < 5:
+        column_4.append(converted_y)
+    elif converted_x > 5 and converted_x < 6:
+        column_5.append(converted_y)
+    elif converted_x > 6 and converted_x < 7:
+        column_6.append(converted_y)
+    elif converted_x > 7 and converted_x < 8:
+        column_7.append(converted_y)
+    elif converted_x > 8 and converted_x < 9:
+        column_8.append(converted_y)
+    elif converted_x > 9 and converted_x < 10:
+        column_9.append(converted_y)
+
+    length_list2=[len(column_1),len(column_2),len(column_3),len(column_4),len(column_5),len(column_6),len(column_7),len(column_8),len(column_9)]
+
+    global newest_click
+
+    print(length_list)
+    print(length_list2)
+
+    for f in range(9):
+        if length_list[f]!=length_list2[f]:
+            print(f+1)
+            newest_click=f+1
+
+
+if __name__ == '__main__':
+    setup()
